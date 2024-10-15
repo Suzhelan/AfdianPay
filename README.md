@@ -25,6 +25,7 @@ gradle
 ```
 ---
 ### 生成赞助链接,这个操作简单的封装了爱发电的支付链接 
+
 首先 获取赞助url，这个是爱发电的赞助支付页链接，可以从下图位置复制到自己的赞助链接，接下来会用到
 ![爱发电赞助页](./img/img_pay.png)
 
@@ -45,9 +46,10 @@ gradle
     }
 ```
 
-
+---
 
 ### 解析赞助请求体为对象
+
 原本的通知回调请求体是一个json字符串，为了方便，sdk封装了解析为对象，方便使用  
 
 `AfdianPayOrder.Order order = AfdianUtil.parseOrder(body);` 
@@ -64,8 +66,9 @@ Order对象与爱发电中订单参数完全对应
 
 配置爱发电的赞助回调地址 先上线到服务端才能保存和测试 需要是https才能保存哦
 ![设置回调地址](./img/img_set_pay_notify_url.png)
-
+---
 ### 查询订单列表
+
 订单列表查询需要提供开发者的的 **user_id** 和 **token** 可以在 [爱发电开发者后台](https://ifdian.net/dashboard/dev) 获取  
 然后调用 `AfdianUtil.newOrderSearcher(String userId, String token)` 方法获取到OrderSearcher实例对象  
 使用OrderSearcher 即可进行订单查询 按照分页查询
@@ -73,7 +76,7 @@ Order对象与爱发电中订单参数完全对应
 
 public static List<AfdianPayOrder.Order> queryOrderByPage(int page) {
 
-    OrderSearcher orderSearcher = AfdianUtil.newOrderSearcher("31e505d6a30b11eea4bf52540025c377", "DyVmKFnPHBfab7vxw3dUMTgsRqu95CEp");
+    OrderSearcher orderSearcher = AfdianUtil.newOrderSearcher("user_id", "token值");
     //查询第一页
     OrderPage orderPage = orderSearcher.queryOrder(page);
     //总页数
