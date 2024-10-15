@@ -5,7 +5,7 @@ plugins {
 }
 import com.vanniktech.maven.publish.SonatypeHost
 group = 'top.sacz'
-version = '2.0.0'
+version = '1.0.1'
 
 
 java {
@@ -34,13 +34,13 @@ tasks.withType(Javadoc).configureEach {
 
 mavenPublishing {
     // 配置坐标,参数一要和命名空间一致，参二为项目名(GroupId),参三为版本号 "1.0.0"
-    coordinates("top.sacz.maven", "AfdianPay", version)
+    coordinates("top.sacz.maven", "afdian-pay", version)
     // 配置 pom 文件信息
     pom {
         // 项目名
         name = "AfdianPay"
         // 项目描述
-        description = "爱发电支付Java的SDK"
+        description = "爱发电支付SDK for Java"
         // 项目主页
         url = "https://github.com/Suzhelan/AfdianPay"
         //开源许可
