@@ -58,7 +58,6 @@ Order对象与爱发电中订单参数完全对应
 订单列表查询需要提供开发者的的 **user_id** 和 **token** 可以在 [爱发电开发者后台](https://ifdian.net/dashboard/dev) 获取  
 然后调用 `AfdianUtil.newOrderSearcher(String userId, String token)` 方法获取到OrderSearcher实例对象  
 使用OrderSearcher 即可进行订单查询 按照分页查询
-
 ```java
 
 public static List<AfdianPayOrder.Order> queryOrderByPage(int page) {
@@ -80,3 +79,29 @@ public static List<AfdianPayOrder.Order> queryOrderByPage(int page) {
     return list;
 }
 ```
+
+
+### 其他参数和对象说明请参阅官方文档 
+```text
+total_count     赞助者总数
+total_page      页数，默认每页50条，请求时，传 page ，curr_page < total_page则可继续请求
+
+out_trade_no 订单号
+custom_order_id 自定义信息
+user_id 下单用户ID
+plan_id 方案ID，如自选，则为空
+title 订单描述
+month 赞助月份
+total_amount 真实付款金额，如有兑换码，则为0.00
+show_amount 显示金额，如有折扣则为折扣前金额
+status 2 为交易成功。目前仅会推送此类型
+remark 订单留言
+redeem_id 兑换码ID
+product_type 0表示常规方案 1表示售卖方案
+discount 折扣
+sku_detail 如果为售卖类型，以数组形式表示具体型号
+address_person 收件人
+address_phone 收件人电话
+address_address 收件人地址
+```
+
