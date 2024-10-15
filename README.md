@@ -11,6 +11,15 @@
 
 ---
 ### 使用 先拉取依赖
+maven
+```xml
+<dependency>
+    <groupId>top.sacz.maven</groupId>
+    <artifactId>afdian-pay</artifactId>
+    <version>1.0.1</version>
+</dependency>
+```
+gradle
 ```groovy
     implementation 'top.sacz.maven:AfdianPay:version'
 ```
