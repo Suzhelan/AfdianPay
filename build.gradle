@@ -33,7 +33,7 @@ tasks.withType(Javadoc).configureEach {
 }
 
 mavenPublishing {
-    // 配置坐标,参数一要和命名空间一致，参二为项目名(GroupId),参三为版本号 "1.0.0"
+    // 配置坐标,参数一要和命名空间一致，参二为项目名(artifactId),参三为版本号 "1.0.0"
     coordinates("top.sacz.maven", "afdian-pay", version)
     // 配置 pom 文件信息
     pom {
