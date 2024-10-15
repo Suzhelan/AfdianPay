@@ -1,17 +1,28 @@
 package top.sacz.afdianpay;
 
-import top.sacz.afdianpay.util.AfdianPayUrlBuilder;
+import top.sacz.afdianpay.entiry.AfdianPayOrder;
+import top.sacz.afdianpay.entiry.OrderPage;
+import top.sacz.afdianpay.util.AfdianUtil;
+import top.sacz.afdianpay.util.OrderSearcher;
+
+import java.util.List;
 
 public class CreateOrderTest {
     public static void main(String[] args) {
-        //发电的付款页面
-        String url = "https://ifdian.net/order/create?product_type=1&plan_id=2219e4d4660911efb2ee52540025c377&sku=%5B%7B%22sku_id%22%3A%22222481dc660911efa8ae52540025c377%22%2C%22count%22%3A1%7D%5D&viokrz_ex=0";
-        //想要实现自定义订单号时
-        String orderId = String.valueOf(System.currentTimeMillis());
-        String payUrl = new AfdianPayUrlBuilder(url)
-                .setRemark("自定义备注参数")
-                .setCustomOrderId(orderId)
-                .build();
-        System.out.println(payUrl);
+
+        OrderSearcher orderSearcher = AfdianUtil.newOrderSearcher("31e505d6a30b11eea4bf52540025c377", "DyVmKFnPHBfab7vxw3dUMTgsRqu95CEp");
+        //查询第一页
+        OrderPage orderPage = orderSearcher.queryOrder(1);
+        //总页数
+        int totalPage = orderPage.getTotalPage();
+        //总订单数
+        int totalCount = orderPage.getTotalCount();
+        System.out.println("总页数:" + totalPage);
+        System.out.println("总订单数:" + totalCount);
+        //订单列表
+        List<AfdianPayOrder.Order> list = orderPage.getList();
+        for (AfdianPayOrder.Order order : list) {
+            System.out.println("订单号:" + order.getOutTradeNo());
+        }
     }
 }
