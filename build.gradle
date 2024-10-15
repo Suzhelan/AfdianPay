@@ -1,0 +1,75 @@
+plugins {
+    id 'java'
+    id "com.vanniktech.maven.publish" version "0.30.0"
+    id "signing"
+}
+import com.vanniktech.maven.publish.SonatypeHost
+group = 'top.sacz'
+version = '2.0.0'
+
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'com.alibaba.fastjson2:fastjson2:2.0.53'
+}
+
+//防止乱码
+tasks.withType(Javadoc).configureEach {
+    options.version = true
+    options.author = true
+    options.encoding = "UTF-8"
+    options.charSet = "UTF-8"  //解决中文乱码
+}
+
+mavenPublishing {
+    // 配置坐标,参数一要和命名空间一致，参二为项目名(GroupId),参三为版本号 "1.0.0"
+    coordinates("top.sacz.maven", "AfdianPay", version)
+    // 配置 pom 文件信息
+    pom {
+        // 项目名
+        name = "AfdianPay"
+        // 项目描述
+        description = "爱发电支付SDK实现"
+        // 项目主页
+        url = "https://github.com/Suzhelan/AfdianPay"
+        //开源许可
+        licenses {
+            license {
+                name = "LGPL-3.0 license"
+                url = "https://www.gnu.org/licenses/lgpl-3.0.html"
+                distribution = "https://www.gnu.org/licenses/lgpl-3.0.html"
+            }
+        }
+        //开发者信息
+        developers {
+            developer {
+                name = "suzhelan"
+                url = "https://github.com/Suzhelan"
+                email = "suzhelan@gmail.com"
+            }
+        }
+        //照着仓库地址填写
+        scm {
+            connection = "scm:git:git://github.com/Suzhelan/AfdianPay.git"
+            developerConnection = "scm:git:ssh://github.com/Suzhelan/AfdianPay.git"
+            url = "https://github.com/Suzhelan/AfdianPay.git"
+        }
+    }
+    // 发布到 Sonatype, 参数为 sonatype host,还可以是 SonatypeHost.DEFAULT,SonatypeHost.S0
+    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
+    //进行签名
+    signAllPublications()
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
