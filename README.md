@@ -21,10 +21,13 @@ maven
 ```
 gradle
 ```groovy
-    implementation 'top.sacz.maven:AfdianPay:version'
+    implementation 'top.sacz.maven:afdian-pay:1.0.1'
 ```
 ---
-### 1. 生成赞助链接,这个操作简单的封装了爱发电的支付链接
+### 1. 生成赞助链接,这个操作简单的封装了爱发电的支付链接 
+首先 获取赞助url，这个是爱发电的赞助支付页链接，可以从下图位置复制到自己的赞助链接，接下来会用到
+![爱发电赞助页](./img/img_pay.png)
+
 使用 `AfdianUtil.newPayUrlBuilder(url)` 方法构造即可，返回值为 `AfdianPayUrlBuilder` 对象，可以设置自定义参数，最后通过 `build()` 方法生成最终的支付链接。
 ```java
     @GetMapping("/createOrder")
@@ -42,8 +45,7 @@ gradle
     }
 ```
 
-其中 支付赞助 url为 爱发电的赞助支付页链接 可以从下图位置复制到自己的赞助链接
-![爱发电赞助页](./img/img_pay.png)
+
 
 ### 2. 解析赞助请求体为对象
 原本的通知回调请求体是一个json字符串，为了方便，sdk封装了解析为对象，方便使用  
